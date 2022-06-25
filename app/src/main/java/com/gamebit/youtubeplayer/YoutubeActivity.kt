@@ -1,16 +1,15 @@
 package com.gamebit.youtubeplayer
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
 import com.google.android.youtube.player.YouTubePlayerView
-import java.lang.reflect.Constructor
+
+const val YOUTUBE_VIDEO_ID = "t1qHL2KLLuM"
+const val YOUTUBE_PLAYLIST = "PLWz5rJ2EKKc9Ty3Zl1hvMVUsXfkn93NRk"
 
 class YoutubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListener {
 
