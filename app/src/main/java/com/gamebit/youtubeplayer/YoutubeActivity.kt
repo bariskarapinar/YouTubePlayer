@@ -2,6 +2,7 @@ package com.gamebit.youtubeplayer
 
 import android.os.Bundle
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
@@ -30,14 +31,22 @@ class YoutubeActivity : YouTubeBaseActivity(), YouTubePlayer.OnInitializedListen
         playerView.layoutParams = ConstraintLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         layout.addView(playerView)
+
+        playerView.initialize(getString(R.string.GOOGLE_API_KEY), this)
     }
 
     override fun onInitializationSuccess(p0: YouTubePlayer.Provider?, p1: YouTubePlayer?, p2: Boolean) {
         TODO("Not yet implemented")
     }
 
-    override fun onInitializationFailure(p0: YouTubePlayer.Provider?, p1: YouTubeInitializationResult?) {
-        TODO("Not yet implemented")
+    override fun onInitializationFailure(provider: YouTubePlayer.Provider?, youTubeInitializationResult: YouTubeInitializationResult?) {
+        val REQUEST_CODE = 0
+        if (youTubeInitializationResult?.isUserRecoverableError == true){
+            youTubeInitializationResult.getErrorDialog(this, REQUEST_CODE)?.show()
+        } else {
+            val errorMessage = "Tehere was an error initializing the YouTubePlayer ($youTubeInitializationResult)"
+            Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+        }
     }
 }
 
